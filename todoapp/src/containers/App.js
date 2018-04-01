@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List } from '../components/List';
+
+import '../style.css';
+import { FETCH_TODOS, FETCH_TODOS_REQUESTED } from '../actions/types';
+import { Todo } from '../components/Todo';
+
 
 class App extends Component {
+  componentWillMount() {
+    this.props.fetchTodos();
+  }
+
   render() {
+    // let todosItem = this.props.todos.map(todo => (
+    //     <ListItem todo={todo} />
+    //   )
+    // );
+
     return (
       <div className="App">
-        <List />
-        {this.props.user.name}
+        <Todo todos={this.props.todos} />
       </div>
     );
   }
@@ -15,20 +27,19 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
-        todo: state.todo
+      todos: state.todo.todos
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setName: (name) => {
-            dispatch({
-                type: "SET_NAME",
-                payload: name
-            });
-        }
+      fetchTodos: () => {
+        dispatch({
+          type: FETCH_TODOS_REQUESTED,
+          payload: ''
+        });
+      }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
