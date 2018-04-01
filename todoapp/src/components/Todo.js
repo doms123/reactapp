@@ -5,7 +5,6 @@ import { Header } from './Header';
 import { ListItem } from './List-item';
 
 export const Todo = (props) => {
-  console.log('props123', props.todos);
   let todosItem;
 
   if(props.todos.length) {

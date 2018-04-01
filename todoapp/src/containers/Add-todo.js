@@ -34,13 +34,16 @@ class AddTodo extends Component {
     e.preventDefault();
 
     let completed = this.state.completed == "Yes" ? true : false;
+    let id = Math.floor((Math.random() * 200) + 101);
 
     const todo = {
+      userId: 1,
+      id,
       title: this.state.title,
       completed: completed
     }
 
-    this.props.addTodo(todo);
+   this.props.addTodo(todo);
 
     this.setState({ fireRedirect: true });
   }
@@ -86,7 +89,6 @@ class AddTodo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
         todo: state.todo
     }
 }

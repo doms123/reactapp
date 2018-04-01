@@ -12,11 +12,6 @@ class App extends Component {
   }
 
   render() {
-    // let todosItem = this.props.todos.map(todo => (
-    //     <ListItem todo={todo} />
-    //   )
-    // );
-
     return (
       <div className="App">
         <Todo todos={this.props.todos} />

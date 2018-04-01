@@ -1,4 +1,4 @@
-import { FETCH_TODOS, ADD_TODO } from '../actions/types';
+import { FETCH_TODOS, ADD_TODO, FETCH_TODO } from '../actions/types';
 
 const initialState = {
   todos: []
@@ -13,7 +13,12 @@ export default (state = initialState, action) => {
       }
 
     case ADD_TODO :
-      console.log('payload123', action.payload)
+      return {
+        ...state,
+        todos: [...state.todos, action.payload]
+      }
+    
+    case FETCH_TODO :
       return {
         ...state,
         todos: action.payload

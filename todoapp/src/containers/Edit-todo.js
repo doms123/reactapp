@@ -3,18 +3,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MdSave from 'react-icons/lib/md/save';
 import MdCancel from 'react-icons/lib/md/cancel';
-
+import { Header } from '../components/Header';
+import { FETCH_TODO_REQUESTED } from '../actions/types';
 import '../style.css';
 
 class EditTodo extends Component {
+  componentWillMount() {
+    const todoId = parseInt(this.props.match.params.id);
+    this.props.fetchSingleTodo(todoId);
+
+    console.log('testdata', this.props)
+  }
+  
   render() {
     return (
       <div className="App">
-        <header>
-          <div className="wrapInner">
-            <h1><Link to="/">TODO APP</Link></h1>
-          </div>
-        </header>
+        <Header />
         <section>
           <div className="wrapInner">
             <div className="todoPage">
@@ -26,10 +30,6 @@ class EditTodo extends Component {
                   <div>
                     <label htmlFor="title">Title</label>
                     <input type="text" name="title" id="title" placeholder="Enter todo title" />
-                  </div>
-                  <div>
-                    <label htmlFor="description">Description</label>
-                    <textarea name="description" rows="5" id="description"/>
                   </div>
                   <div>
                     <label htmlFor="completed">Completed</label>
@@ -52,17 +52,16 @@ class EditTodo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
         todo: state.todo
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setName: (name) => {
+        fetchSingleTodo: (id) => {
             dispatch({
-                type: "SET_NAME",
-                payload: name
+                type: FETCH_TODO_REQUESTED,
+                payload: id
             });
         }
     }
