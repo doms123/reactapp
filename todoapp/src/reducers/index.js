@@ -3,5 +3,5 @@ import todoReducer from './todo-reducer';
 
 
 export default combineReducers({
-    todo: todoReducer
+    todos: todoReducer
 });

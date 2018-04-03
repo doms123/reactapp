@@ -1,40 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
-import MdAdd from 'react-icons/lib/md/add';
-import MdCancel from 'react-icons/lib/md/cancel';
-import { Header } from '../components/Header';
-import '../style.css';
-import { ADD_TODO_REQUESTED } from '../actions/types';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
+import MdAdd from 'react-icons/lib/md/add'
+import MdCancel from 'react-icons/lib/md/cancel'
+import { Header } from '../components/Header'
+import '../style.css'
+import { ADD_TODO_REQUESTED } from '../actions/types'
 
 class AddTodo extends Component {
 
   constructor(props) {
-    super();
+    super()
 
     this.state = {
       title: '',
       body: '',
       completed: 'No',
       fireRedirect: false
-    };
+    }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e) {
-    let val = e.target.value;
-    let name = e.target.name;
-    this.setState({[name]: val});
+    this.setState({ [e.target.name]: e.target.value})
   }
   
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    let completed = this.state.completed == "Yes" ? true : false;
-    let id = Math.floor((Math.random() * 200) + 101);
+    let completed = this.state.completed === "Yes" ? true : false
+    let id = Math.floor((Math.random() * 400) + 301)
 
     const todo = {
       userId: 1,
@@ -43,9 +41,9 @@ class AddTodo extends Component {
       completed: completed
     }
 
-   this.props.addTodo(todo);
+    this.props.addTodo(todo)
 
-    this.setState({ fireRedirect: true });
+    this.setState({ fireRedirect: true })
   }
 
   render() {
@@ -83,25 +81,23 @@ class AddTodo extends Component {
           </div>
         </section>
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        todo: state.todo
-    }
-}
+const mapStateToProps = ({ todos }) => ({
+  todos: todos && todos.all
+})
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-      addTodo: (todo) => {
-        dispatch({
-          type: ADD_TODO_REQUESTED,
-          payload: todo
-        });
-      }
+  return {
+    addTodo: (todo) => {
+      dispatch({
+        type: ADD_TODO_REQUESTED,
+        payload: todo
+      })
     }
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)

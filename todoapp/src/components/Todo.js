@@ -5,13 +5,7 @@ import { Header } from './Header';
 import { ListItem } from './List-item';
 
 export const Todo = (props) => {
-  let todosItem;
-
-  if(props.todos.length) {
-    todosItem = props.todos.map(todo => (
-      <ListItem key={todo.id} todo={todo} />
-    ));
-  }
+  const {todos} = props
 
   return (
     <div className="Todo">
@@ -25,12 +19,14 @@ export const Todo = (props) => {
             </div>
             <div className="todoList">
               <ul>
-                {todosItem}
+                {todos && todos.map(todo => (
+                  <ListItem key={todo.id} todo={todo} />
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </section>
     </div>
-  );
+  )
 }
