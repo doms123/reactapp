@@ -5,7 +5,7 @@ import { Header } from './Header';
 import { ListItem } from './List-item';
 
 export const Todo = (props) => {
-  const {todos} = props
+  const {todos, onDelete} = props
 
   return (
     <div className="Todo">
@@ -20,7 +20,7 @@ export const Todo = (props) => {
             <div className="todoList">
               <ul>
                 {todos && todos.map(todo => (
-                  <ListItem key={todo.id} todo={todo} />
+                  <ListItem key={todo.id} deleteItem={onDelete} todo={todo} />
                 ))}
               </ul>
             </div>
